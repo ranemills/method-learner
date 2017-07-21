@@ -2,6 +2,7 @@ package com.mills;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.junit.Ignore;
@@ -16,6 +17,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PlaceBellTest {
 
     private static final String ZANUSSI = "Zanussi";
+
+    @Test
+    public void testHashCodeAndEquals()
+    {
+        EqualsVerifier.forClass(PlaceBell.class)
+                      .withIgnoredFields("_learningResults", "_cachedPlaceBellRating")
+                      .verify();
+    }
 
     @Test
     public void noResultsGivesRatingOfZero()

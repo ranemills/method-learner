@@ -7,17 +7,19 @@ import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class PlaceBell {
+public final class PlaceBell {
+
     private static final int DAYS_BACK_TO_GO = 7;
     private static final double MAX_RATING_WITH_ALGORITHM = 3.62685925185925;
     private static final double RATING_FOR_100 = (0.6) * MAX_RATING_WITH_ALGORITHM;
 
     private final String _methodName;
     private final PlaceBellNumber _placeBellNumber;
-    private List<LearningResult> _learningResults;
+
+    private final Collection<LearningResult> _learningResults;
     private Integer _cachedPlaceBellRating;
 
     public PlaceBell(String methodName, PlaceBellNumber placeBellNumber)
@@ -29,6 +31,10 @@ public class PlaceBell {
 
     public PlaceBellNumber getPlaceBellNumber() {
         return _placeBellNumber;
+    }
+
+    public String getMethodName() {
+        return _methodName;
     }
 
     public void addLearningResult(LearningResult learningResult)
@@ -68,6 +74,14 @@ public class PlaceBell {
     }
 
     @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                   .append(_methodName)
+                   .append(_placeBellNumber)
+                   .toHashCode();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
 
@@ -87,17 +101,5 @@ public class PlaceBell {
                    .append("_methodName", _methodName)
                    .append("_placeBellNumber", _placeBellNumber)
                    .toString();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                   .append(_methodName)
-                   .append(_placeBellNumber)
-                   .toHashCode();
-    }
-
-    public String getMethodName() {
-        return _methodName;
     }
 }
