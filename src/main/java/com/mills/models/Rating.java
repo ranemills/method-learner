@@ -1,4 +1,4 @@
-package com.mills;
+package com.mills.models;
 
 /**
  * Created by ryan on 21/07/17.

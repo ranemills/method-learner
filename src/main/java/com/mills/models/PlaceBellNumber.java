@@ -1,4 +1,4 @@
-package com.mills;
+package com.mills.models;
 
 public enum PlaceBellNumber {
     ONE,

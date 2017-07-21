@@ -1,10 +1,9 @@
 package com.mills.services;
 
-import com.mills.LearningResult;
-import com.mills.PlaceBell;
-import com.mills.PlaceBellNumber;
-import com.mills.Rating;
-import org.assertj.core.api.Condition;
+import com.mills.models.LearningResult;
+import com.mills.models.PlaceBell;
+import com.mills.models.PlaceBellNumber;
+import com.mills.models.Rating;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;

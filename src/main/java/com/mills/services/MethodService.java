@@ -1,6 +1,6 @@
 package com.mills.services;
 
-import com.mills.PlaceBellNumber;
+import com.mills.models.PlaceBellNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

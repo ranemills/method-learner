@@ -1,8 +1,8 @@
 package com.mills.services;
 
-import com.mills.LearningResult;
-import com.mills.PlaceBell;
-import com.mills.PlaceBellNumber;
+import com.mills.models.LearningResult;
+import com.mills.models.PlaceBell;
+import com.mills.models.PlaceBellNumber;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

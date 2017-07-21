@@ -2,6 +2,9 @@ package com.mills;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import com.mills.models.LearningResult;
+import com.mills.models.PlaceBell;
+import com.mills.models.Rating;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
@@ -10,7 +13,7 @@ import org.junit.Test;
 
 import java.util.Set;
 
-import static com.mills.PlaceBellNumber.FIVE;
+import static com.mills.models.PlaceBellNumber.FIVE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 

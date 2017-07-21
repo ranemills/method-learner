@@ -1,4 +1,4 @@
-package com.mills;
+package com.mills.models;
 
 import org.joda.time.DateTime;
 
