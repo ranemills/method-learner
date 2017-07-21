@@ -1,11 +1,13 @@
 package com.mills;
 
+import com.sun.org.apache.bcel.internal.generic.InstructionComparator;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
@@ -18,6 +20,8 @@ public class PlaceBell {
     private PlaceBellNumber _placeBellNumber;
     private List<LearningResult> _learningResults;
 
+    private Integer _cachedPlaceBellRating;
+
     public PlaceBell(String methodName, PlaceBellNumber placeBellNumber)
     {
         _methodName = methodName;
@@ -28,9 +32,19 @@ public class PlaceBell {
     public void addLearningResult(LearningResult learningResult)
     {
         _learningResults.add(learningResult);
+        _cachedPlaceBellRating = null;
     }
 
-    public double getPlaceBellRating()
+    public int getPlaceBellRating()
+    {
+        if(_cachedPlaceBellRating == null)
+        {
+            _cachedPlaceBellRating = computePlaceBellRating();
+        }
+        return _cachedPlaceBellRating;
+    }
+
+    private int computePlaceBellRating()
     {
         if(!_learningResults.isEmpty())
         {
@@ -51,65 +65,8 @@ public class PlaceBell {
 
     }
 
-}
-
-class LearningResult {
-
-    private final DateTime _dateTime;
-    private final Rating _rating;
-
-    private LearningResult(DateTime dateTime, Rating rating)
-    {
-        _dateTime = dateTime;
-        _rating = rating;
-    }
-
-    public static LearningResult of(DateTime dateTime, Rating rating)
-    {
-        return new LearningResult(dateTime, rating);
-    }
-
-    public DateTime getDateTime() {
-        return _dateTime;
-    }
-
-    public Rating getRating() {
-        return _rating;
+    public String getMethodName() {
+        return _methodName;
     }
 }
 
-enum Rating {
-
-    ONE(1),
-    TWO(2),
-    THREE(3),
-    FOUR(4),
-    FIVE(5);
-
-    private int _rating;
-
-    Rating(int rating)
-    {
-        _rating = rating;
-    }
-
-    public int asInt() {
-        return _rating;
-    }
-
-}
-
-enum PlaceBellNumber {
-    ONE,
-    TWO,
-    THREE,
-    FOUR,
-    FIVE,
-    SIX,
-    SEVEN,
-    EIGHT,
-    NINE,
-    TEN,
-    ELEVEN,
-    TWELVE;
-}
