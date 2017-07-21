@@ -1,5 +1,8 @@
 package com.mills;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
@@ -12,10 +15,9 @@ public class PlaceBell {
     private static final double MAX_RATING_WITH_ALGORITHM = 3.62685925185925;
     private static final double RATING_FOR_100 = (0.6) * MAX_RATING_WITH_ALGORITHM;
 
-    private String _methodName;
-    private PlaceBellNumber _placeBellNumber;
+    private final String _methodName;
+    private final PlaceBellNumber _placeBellNumber;
     private List<LearningResult> _learningResults;
-
     private Integer _cachedPlaceBellRating;
 
     public PlaceBell(String methodName, PlaceBellNumber placeBellNumber)
@@ -23,6 +25,10 @@ public class PlaceBell {
         _methodName = methodName;
         _placeBellNumber = placeBellNumber;
         _learningResults = new ArrayList<>();
+    }
+
+    public PlaceBellNumber getPlaceBellNumber() {
+        return _placeBellNumber;
     }
 
     public void addLearningResult(LearningResult learningResult)
@@ -61,8 +67,37 @@ public class PlaceBell {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PlaceBell placeBell = (PlaceBell) o;
+
+        return new EqualsBuilder()
+                   .append(_methodName, placeBell._methodName)
+                   .append(_placeBellNumber, placeBell._placeBellNumber)
+                   .isEquals();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                   .append("_methodName", _methodName)
+                   .append("_placeBellNumber", _placeBellNumber)
+                   .toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                   .append(_methodName)
+                   .append(_placeBellNumber)
+                   .toHashCode();
+    }
+
     public String getMethodName() {
         return _methodName;
     }
 }
-

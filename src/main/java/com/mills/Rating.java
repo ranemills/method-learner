@@ -3,7 +3,7 @@ package com.mills;
 /**
  * Created by ryan on 21/07/17.
  */
-enum Rating {
+public enum Rating {
 
     ONE(1),
     TWO(2),
