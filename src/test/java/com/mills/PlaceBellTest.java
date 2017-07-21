@@ -5,28 +5,28 @@ import com.google.common.collect.Sets;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.junit.Ignore;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.Set;
 
 import static com.mills.PlaceBellNumber.FIVE;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
-class PlaceBellTest {
+public class PlaceBellTest {
 
     private static final String ZANUSSI = "Zanussi";
 
     @Test
-    void noResultsGivesRatingOfZero()
+    public void noResultsGivesRatingOfZero()
     {
         PlaceBell placeBell = new PlaceBell(ZANUSSI, FIVE);
 
-        assertEquals(0, placeBell.getPlaceBellRating());
+        assertThat(placeBell.getPlaceBellRating()).isEqualTo(0);
     }
 
     @Test
-    void fiveDaysOfTopRatingGivesRatingOfOneHundred()
+    public void fiveDaysOfTopRatingGivesRatingOfOneHundred()
     {
         PlaceBell placeBell = new PlaceBell(ZANUSSI, FIVE);
 
@@ -36,12 +36,12 @@ class PlaceBellTest {
         placeBell.addLearningResult(LearningResult.of(DateTime.now().minusDays(2), Rating.FIVE));
         placeBell.addLearningResult(LearningResult.of(DateTime.now().minusDays(1), Rating.FIVE));
 
-        assertEquals(100, placeBell.getPlaceBellRating());
+        assertThat(placeBell.getPlaceBellRating()).isEqualTo(100);
     }
 
     @Test
     @Ignore
-    void loggingWithTopRating()
+    public void loggingWithTopRating()
     {
 
         Set<DateTime> availableDays = ImmutableSet.of(DateTime.now().minusDays(7),

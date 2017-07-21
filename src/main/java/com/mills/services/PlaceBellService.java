@@ -4,6 +4,7 @@ import com.mills.PlaceBell;
 import com.mills.PlaceBellNumber;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -14,6 +15,11 @@ import java.util.stream.Collectors;
 public class PlaceBellService {
 
     private List<PlaceBell> _placeBells;
+
+    private PlaceBellService()
+    {
+        _placeBells = new ArrayList<>();
+    }
 
     public void addPlaceBell(String methodName, PlaceBellNumber placeBellNumber)
     {
