@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
@@ -39,7 +40,7 @@ class PlaceBellTest {
     }
 
     @Test
-//    @Ignore
+    @Ignore
     void loggingWithTopRating()
     {
 
