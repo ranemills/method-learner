@@ -13,12 +13,13 @@ public class MethodService {
 
     private Collection<String> _methodNames;
 
-    @Autowired
-    private PlaceBellService _placeBellService;
+    private final PlaceBellService _placeBellService;
 
-    private MethodService()
+    @Autowired
+    private MethodService(PlaceBellService placeBellService)
     {
         _methodNames = new ArrayList<>();
+        _placeBellService = placeBellService;
     }
 
     public void addMethod(String methodName, List<PlaceBellNumber> placeBells)
