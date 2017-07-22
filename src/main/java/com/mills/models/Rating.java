@@ -1,5 +1,8 @@
 package com.mills.models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by ryan on 21/07/17.
  */
@@ -13,6 +16,15 @@ public enum Rating {
 
     private int _rating;
 
+    private static Map<Integer, Rating> intToPlaceBellMap = new HashMap<>();
+
+    static {
+        for(Rating number : values())
+        {
+            intToPlaceBellMap.put(number._rating, number);
+        }
+    }
+
     Rating(int rating)
     {
         _rating = rating;
@@ -20,6 +32,11 @@ public enum Rating {
 
     public int asInt() {
         return _rating;
+    }
+
+    public static Rating valueOf(Integer number)
+    {
+        return intToPlaceBellMap.get(number);
     }
 
 }

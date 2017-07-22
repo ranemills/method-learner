@@ -33,6 +33,10 @@ public enum PlaceBellNumber {
         _value = value;
     }
 
+    public Integer getValue() {
+        return _value;
+    }
+
     public static PlaceBellNumber valueOf(Integer number)
     {
         return intToPlaceBellMap.get(number);

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css" />
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Spring Boot</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h2>Existing Methods</h2>
+
+        <ul>
+            <!--/*@thymesVar id="existingMethods" type="java.util.List<java.lang.String>"*/-->
+            <li th:each="method : ${existingMethods}" th:text="${method}"></li>
+        </ul>
+
+        <h2>Add Method</h2>
+
+        <!--/*@thymesVar id="method" type="com.mills.models.template.MethodModel"*/-->
+        <form action="#" th:action="@{/methods}" th:object="${method}" method="post">
+            <fieldset>
+                <p><label for="method-field">Method Name</label>: <input id="method-field" type="text" th:field="*{methodName}" /></p>
+                <p><label for="place-bells-field">Place Bells (comma-separated)</label>: <input id="place-bells-field" type="text" th:field="*{placeBells}" /></p>
+                <div class="submit">
+                    <button type="submit" name="save">Add Method</button>
+                </div>
+            </fieldset>
+        </form>
+
+        <h2>Next place bell to learn</h2>
+        <div>
+            <p th:text="${nextPlaceBell?.methodName}"></p>
+            <p th:text="${nextPlaceBell?.placeBellNumber?.value}"></p>
+        </div>
+
+        <h3>Rating</h3>
+
+        <!--/*@thymesVar id="placeBellResult" type="com.mills.models.template.PlaceBellResult"*/-->
+        <form action="#" th:action="@{/result}" th:object="${placeBellResult}" method="post">
+            <fieldset>
+                <p><label for="rating-field">Rating (1-5)</label>: <input id="rating-field" type="number" maxlength="1" th:field="*{value}"/></p>
+            </fieldset>
+        </form>
+
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>
