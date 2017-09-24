@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common :: headElement">
+    <title id="pageTitle">Method Management</title>
+</head>
+<body>
+
+<div th:replace="common :: header"></div>
+
+<div th:include="common :: contentContainer">
+
+    <div id="content">
+        <h2>Add Method</h2>
+
+        <!--/*@thymesVar id="method" type="com.mills.models.template.MethodModel"*/-->
+        <form action="#" th:action="@{/api/methods}" th:object="${method}" method="post">
+            <fieldset>
+                <p><label for="method-field">Method Name</label>: <input id="method-field" type="text" th:field="*{methodName}" /></p>
+                <p><label for="place-bells-field">Place Bells (comma-separated)</label>: <input id="place-bells-field" type="text" th:field="*{placeBells}" /></p>
+                <div class="submit">
+                    <button type="submit" name="save">Add Method</button>
+                </div>
+            </fieldset>
+        </form>
+
+        <h2>Existing Methods</h2>
+
+        <ul>
+            <!--/*@thymesVar id="existingMethods" type="java.util.List<java.lang.String>"*/-->
+            <li th:each="method : ${existingMethods}" th:text="${method}"></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

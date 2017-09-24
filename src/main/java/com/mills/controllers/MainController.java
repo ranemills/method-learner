@@ -1,8 +1,9 @@
-package com.mills;
+package com.mills.controllers;
 
+import com.mills.constants.HtmlFiles;
+import com.mills.constants.PageRoutes;
 import com.mills.models.LearningResult;
 import com.mills.models.PlaceBell;
-import com.mills.models.PlaceBellNumber;
 import com.mills.models.Rating;
 import com.mills.models.template.MethodModel;
 import com.mills.models.template.PlaceBellResult;
@@ -14,12 +15,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
+import static com.mills.constants.PageRoutes.redirect;
 
 @Controller
 public class MainController {
@@ -33,7 +34,7 @@ public class MainController {
         _placeBellService = placeBellService;
     }
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String welcome(Map<String, Object> model)
     {
         model.put("existingMethods", _methodService.getMethods());
@@ -49,25 +50,7 @@ public class MainController {
         }
         model.put("placeBellResult", placeBellResult);
 
-        return "welcome";
-    }
-
-    @PostMapping("/methods")
-    public String addMethod(final MethodModel methodModel, final BindingResult bindingResult, final ModelMap model) {
-        if (bindingResult.hasErrors()) {
-            for(ObjectError err : bindingResult.getAllErrors())
-            {
-                System.out.println(err);
-            }
-            return "welcome";
-        }
-
-        List<PlaceBellNumber> placeBellNumbers = methodModel.getPlaceBells().stream().map(PlaceBellNumber::valueOf).collect(Collectors.toList());
-
-        _methodService.addMethod(methodModel.getMethodName(), placeBellNumbers);
-
-        model.clear();
-        return "redirect:/";
+        return HtmlFiles.HOME;
     }
 
     @PostMapping("/result")
@@ -77,13 +60,13 @@ public class MainController {
             {
                 System.out.println(err);
             }
-            return "welcome";
+            return HtmlFiles.HOME;
         }
 
         _placeBellService.addLearningResultForPlaceBell(placeBellResult.getMethodName(), placeBellResult.getPlaceBell(), LearningResult.of(DateTime.now(), Rating.valueOf(placeBellResult.getValue())));
 
         model.clear();
-        return "redirect:/";
+        return redirect(PageRoutes.HOME);
     }
 
 }

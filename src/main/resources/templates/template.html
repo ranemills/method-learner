@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common :: headElement">
+    <title id="pageTitle">Insert title here</title>
+</head>
+<body>
+
+<div th:replace="common :: header"></div>
+
+<div th:include="common :: contentContainer">
+
+    <div id="content">
+        Insert content here
+    </div>
+
+</div>
+
+</body>
+</html>
